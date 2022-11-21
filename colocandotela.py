@@ -10,16 +10,19 @@ pygame.display.set_caption('BellyBaloo')
 
 game = True
 
-image = pygame.image.load('bla/img/menu.png').convert()
+
+image = pygame.image.load('assets/img/menu.png').convert()
 image = pygame.transform.scale(image, (400, 600))
+imageplay = pygame.image.load('assets/img/play.png').convert_alpha()
+imageplay = pygame.transform.scale(imageplay, (200, 100))
 
 while game:
     for event in pygame.event.get() :
         if event.type == pygame.QUIT:
             game = False
-
     window.fill((255, 153, 255))  # Preenche com a cor
     window.blit(image, (0, 0))
+    window.blit(imageplay,(100,200))
 
     pygame.display.update()  # Mostra o novo frame para o jogador
 
