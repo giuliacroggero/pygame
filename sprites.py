@@ -1,10 +1,10 @@
 import random
 import pygame
-from config import WIDTH, HEIGHT, METEOR_WIDTH, METEOR_HEIGHT, SHIP_WIDTH, SHIP_HEIGHT
-from assets import BALOO_IMG, PEW_SOUND, METEOR_IMG, BULLET_IMG, EXPLOSION_ANIM
+from config import WIDTH, HEIGHT, SHIP_WIDTH, SHIP_HEIGHT, CANETA_WIDTH, CANETA_HEIGHT, CONTROLE_WIDTH, CONTROLE_HEIGHT, LATINHA_WIDTH, LATINHA_HEIGHT
+from assets import BALOO_IMG, PEW_SOUND, METEOR_IMG, BULLET_IMG, EXPLOSION_ANIM, CANETA_IMG, CONTROLE_IMG, LATINHA_IMG
 
 
-class Ship(pygame.sprite.Sprite):
+class baloo(pygame.sprite.Sprite):
     def __init__(self, groups, assets):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
@@ -53,11 +53,13 @@ class objetos(pygame.sprite.Sprite):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
 
-        self.image = assets[METEOR_IMG]
+        self.image = assets[CANETA_IMG]
+        self.image = assets[CONTROLE_IMG]
+        self.image = assets[LATINHA_IMG]
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
-        self.rect.x = random.randint(0, WIDTH-METEOR_WIDTH)
-        self.rect.y = random.randint(-100, -METEOR_HEIGHT)
+        self.rect.x = random.randint(0, WIDTH-CANETA_WIDTH, CONTROLE_WIDTH, LATINHA_WIDTH)
+        self.rect.y = random.randint(-100, -CANETA_HEIGHT, CONTROLE_HEIGHT, LATINHA_HEIGHT)
         self.speedx = random.randint(-3, 3)
         self.speedy = random.randint(2, 9)
 
@@ -68,8 +70,8 @@ class objetos(pygame.sprite.Sprite):
         # Se o meteoro passar do final da tela, volta para cima e sorteia
         # novas posições e velocidades
         if self.rect.top > HEIGHT or self.rect.right < 0 or self.rect.left > WIDTH:
-            self.rect.x = random.randint(0, WIDTH-METEOR_WIDTH)
-            self.rect.y = random.randint(-100, -METEOR_HEIGHT)
+            self.rect.x = random.randint(0, WIDTH-CANETA_WIDTH, CONTROLE_WIDTH, LATINHA_WIDTH)
+            self.rect.y = random.randint(-100, -CANETA_HEIGHT, CONTROLE_HEIGHT, LATINHA_HEIGHT)
             self.speedx = random.randint(-3, 3)
             self.speedy = random.randint(2, 9)
 
