@@ -1,7 +1,7 @@
 import random
 import pygame
 from config import WIDTH, HEIGHT, METEOR_WIDTH, METEOR_HEIGHT, SHIP_WIDTH, SHIP_HEIGHT
-from assets import SHIP_IMG, PEW_SOUND, METEOR_IMG, BULLET_IMG, EXPLOSION_ANIM
+from assets import BALOO_IMG, PEW_SOUND, METEOR_IMG, BULLET_IMG, EXPLOSION_ANIM
 
 
 class Ship(pygame.sprite.Sprite):
@@ -9,7 +9,7 @@ class Ship(pygame.sprite.Sprite):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
 
-        self.image = assets[SHIP_IMG]
+        self.image = assets[BALOO_IMG]
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.centerx = WIDTH / 2
@@ -23,7 +23,7 @@ class Ship(pygame.sprite.Sprite):
         self.shoot_ticks = 500
 
     def update(self):
-        # Atualização da posição da nave
+        # Atualização da posição do baloo
         self.rect.x += self.speedx
 
         # Mantem dentro da tela
@@ -48,7 +48,7 @@ class Ship(pygame.sprite.Sprite):
             self.groups['all_bullets'].add(new_bullet)
             self.assets[PEW_SOUND].play()
 
-class Meteor(pygame.sprite.Sprite):
+class objetos(pygame.sprite.Sprite):
     def __init__(self, assets):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
