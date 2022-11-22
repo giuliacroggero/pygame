@@ -28,7 +28,7 @@ def init_screen(screen):
                 state = QUIT
                 running = False
 
-            if event.type == MOUSEBUTTONDOWN:
+            if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse = pygame.mouse.get_pos()
                 if play_position.collidepoint(mouse):
                     state = GAME
