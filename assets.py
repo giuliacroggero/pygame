@@ -36,9 +36,9 @@ def load_assets():
 
     pygame.mixer.music.load(os.path.join(SND_DIR, 'musicafundo.wav'))
     pygame.mixer.music.set_volume(0.4)
-    assets[BOOM_SOUND] = pygame.mixer.Sound(os.path.join(SND_DIR, 'expl3.wav'))
-    assets[DESTROY_SOUND] = pygame.mixer.Sound(os.path.join(SND_DIR, 'expl6.wav'))
-    assets[PEW_SOUND] = pygame.mixer.Sound(os.path.join(SND_DIR, 'pew.wav'))
+    assets['COLOCA O LATIDO'] = pygame.mixer.Sound(os.path.join(SND_DIR, 'expl3.wav'))
+    assets['SALIVA DE GOSTOU'] = pygame.mixer.Sound(os.path.join(SND_DIR, 'expl6.wav'))
+    
 
 
     return assets
