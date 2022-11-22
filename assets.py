@@ -32,6 +32,8 @@ def load_assets():
     assets[SCORE_FONT] = pygame.font.Font(os.path.join(FNT_DIR, 'PressStart2P.ttf'), 28)
     assets[PLAY_IMG] = pygame.image.load(os.path.join(IMG_DIR, 'play.png')).convert_alpha()
     assets[PLAY_IMG] = pygame.transform.scale(assets['play_img'], (PLAY_WIDTH, PLAY_HEIGHT))
+    btnplay = pygame.image.load('play.png').convert_alpha()
+    rect = btnplay.get_rect()
 
 
     pygame.mixer.music.load(os.path.join(SND_DIR, 'musicafundo.wav'))

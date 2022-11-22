@@ -1,5 +1,5 @@
 import pygame
-from config import FPS, WIDTH, HEIGHT, BLACK, YELLOW, RED
+from config import FPS, WIDTH, HEIGHT, BLACK
 from assets import load_assets, SCORE_FONT
 from sprites import baloo, comidas, objetos
 
