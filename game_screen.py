@@ -26,17 +26,16 @@ def game_screen(window):
     all_sprites.add(player)
     # Criando os objetos
     for i in range(3):
-        objetos = objetos(assets)
+        Objetos = objetos(assets)
         all_sprites.add(objetos)
         all_comidas.add(objetos)
     for i in range(4):
-        objetos = comidas(assets)
+        Comidas = comidas(assets)
         all_sprites.add(comidas)
         all_comidas.add(comidas)
 
     DONE = 0
     PLAYING = 1
-    EXPLODING = 2
     state = PLAYING
 
     keys_down = {}
