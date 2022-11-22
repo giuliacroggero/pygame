@@ -1,7 +1,8 @@
 import pygame
 from config import FPS, WIDTH, HEIGHT, BLACK, YELLOW, RED
-from assets import load_assets, DESTROY_SOUND, BOOM_SOUND, BACKGROUND, SCORE_FONT
-from sprites import Ship, Meteor, Bullet, Explosion
+from assets import load_assets
+from sprites import baloo, objetos, Bullet, Explosion, comidas
+
 
 
 def game_screen(window):
@@ -12,21 +13,23 @@ def game_screen(window):
 
     # Criando um grupo de meteoros
     all_sprites = pygame.sprite.Group()
-    all_meteors = pygame.sprite.Group()
+    all_objetos = pygame.sprite.Group()
+    all_comidas = pygame.sprite.Group()
     all_bullets = pygame.sprite.Group()
     groups = {}
     groups['all_sprites'] = all_sprites
-    groups['all_meteors'] = all_meteors
+    groups['all_objetos'] = all_objetos
+    groups['all_comidas'] = all_comidas
     groups['all_bullets'] = all_bullets
 
     # Criando o jogador
-    player = Ship(groups, assets)
+    player = baloo(groups, assets)
     all_sprites.add(player)
-    # Criando os meteoros
-    for i in range(8):
-        meteor = Meteor(assets)
-        all_sprites.add(meteor)
-        all_meteors.add(meteor)
+    # Criando os objetos
+    for i in range(4):
+        objetos = objetos(assets)
+        all_sprites.add(comidas)
+        all_comidas.add(comidas)
 
     DONE = 0
     PLAYING = 1
@@ -77,10 +80,10 @@ def game_screen(window):
             hits = pygame.sprite.groupcollide(all_meteors, all_bullets, True, True, pygame.sprite.collide_mask)
             for meteor in hits: # As chaves são os elementos do primeiro grupo (meteoros) que colidiram com alguma bala
                 # O meteoro e destruido e precisa ser recriado
-                assets[DESTROY_SOUND].play()
+                #assets[DESTROY_SOUND].play()
                 m = Meteor(assets)
                 all_sprites.add(m)
-                all_meteors.add(m)
+                #all_meteors.add(m)
 
                 # No lugar do meteoro antigo, adicionar uma explosão.
                 explosao = Explosion(meteor.rect.center, assets)
@@ -95,7 +98,7 @@ def game_screen(window):
             hits = pygame.sprite.spritecollide(player, all_meteors, True, pygame.sprite.collide_mask)
             if len(hits) > 0:
                 # Toca o som da colisão
-                assets[BOOM_SOUND].play()
+                #assets[BOOM_SOUND].play()
                 player.kill()
                 lives -= 1
                 explosao = Explosion(player.rect.center, assets)
@@ -111,17 +114,17 @@ def game_screen(window):
                     state = DONE
                 else:
                     state = PLAYING
-                    player = Ship(groups, assets)
+                    player = baloo(groups, assets)
                     all_sprites.add(player)
 
         # ----- Gera saídas
         window.fill(BLACK)  # Preenche com a cor branca
-        window.blit(assets[BACKGROUND], (0, 0))
+        #window.blit(assets[BACKGROUND], (0, 0))
         # Desenhando meteoros
         all_sprites.draw(window)
-
+    
         # Desenhando o score
-        text_surface = assets[SCORE_FONT].render("{:08d}".format(score), True, YELLOW)
+        #text_surface = assets[SCORE_FONT].render("{:08d}".format(score), True, YELLOW)
         text_rect = text_surface.get_rect()
         text_rect.midtop = (WIDTH / 2,  10)
         window.blit(text_surface, text_rect)
