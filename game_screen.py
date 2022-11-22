@@ -1,7 +1,7 @@
 import pygame
 from config import FPS, WIDTH, HEIGHT, BLACK, YELLOW, RED
-from assets import load_assets
-from sprites import baloo, objetos, Bullet, Explosion, comidas
+from assets import load_assets, SCORE_FONT
+from sprites import baloo, comidas, objetos
 
 
 
@@ -11,23 +11,26 @@ def game_screen(window):
 
     assets = load_assets()
 
-    # Criando um grupo de meteoros
+    # Criando grupos
     all_sprites = pygame.sprite.Group()
     all_objetos = pygame.sprite.Group()
     all_comidas = pygame.sprite.Group()
-    all_bullets = pygame.sprite.Group()
+    #all_bullets = pygame.sprite.Group()
     groups = {}
     groups['all_sprites'] = all_sprites
     groups['all_objetos'] = all_objetos
     groups['all_comidas'] = all_comidas
-    groups['all_bullets'] = all_bullets
 
     # Criando o jogador
     player = baloo(groups, assets)
     all_sprites.add(player)
     # Criando os objetos
-    for i in range(4):
+    for i in range(3):
         objetos = objetos(assets)
+        all_sprites.add(objetos)
+        all_comidas.add(objetos)
+    for i in range(4):
+        objetos = comidas(assets)
         all_sprites.add(comidas)
         all_comidas.add(comidas)
 
@@ -76,46 +79,25 @@ def game_screen(window):
         all_sprites.update()
 
         if state == PLAYING:
-            # Verifica se houve colisão entre tiro e meteoro
-            hits = pygame.sprite.groupcollide(all_meteors, all_bullets, True, True, pygame.sprite.collide_mask)
-            for meteor in hits: # As chaves são os elementos do primeiro grupo (meteoros) que colidiram com alguma bala
-                # O meteoro e destruido e precisa ser recriado
-                #assets[DESTROY_SOUND].play()
-                m = Meteor(assets)
-                all_sprites.add(m)
-                #all_meteors.add(m)
-
-                # No lugar do meteoro antigo, adicionar uma explosão.
-                explosao = Explosion(meteor.rect.center, assets)
-                all_sprites.add(explosao)
-
-                # Ganhou pontos!
-                score += 100
-                if score % 1000 == 0:
-                    lives += 1
-
-            # Verifica se houve colisão entre nave e meteoro
-            hits = pygame.sprite.spritecollide(player, all_meteors, True, pygame.sprite.collide_mask)
+            # Verifica se houve colisão entre baloo e objeto
+            hits = pygame.sprite.spritecollide(player, all_objetos, True, pygame.sprite.collide_mask)
             if len(hits) > 0:
-                # Toca o som da colisão
-                #assets[BOOM_SOUND].play()
-                player.kill()
-                lives -= 1
-                explosao = Explosion(player.rect.center, assets)
-                all_sprites.add(explosao)
-                state = EXPLODING
-                keys_down = {}
-                explosion_tick = pygame.time.get_ticks()
-                explosion_duration = explosao.frame_ticks * len(explosao.explosion_anim) + 400
-        elif state == EXPLODING:
-            now = pygame.time.get_ticks()
-            if now - explosion_tick > explosion_duration:
-                if lives == 0:
-                    state = DONE
-                else:
-                    state = PLAYING
-                    player = baloo(groups, assets)
-                    all_sprites.add(player)
+                #toca o latido e são criados novos objetos
+                assets['procurar som de reclamacao'].play()
+                o = objetos(assets)
+                all_sprites.add(o)
+                all_objetos.add(o)
+                lives =  lives - 1
+
+                score = score
+                #Fazer sumir o objeto que encostou no baloo
+
+        if lives == 0:
+                state = DONE
+        else:
+            state = PLAYING
+            player = baloo(groups, assets)
+            all_sprites.add(player)
 
         # ----- Gera saídas
         window.fill(BLACK)  # Preenche com a cor branca

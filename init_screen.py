@@ -1,5 +1,6 @@
 import pygame
 import random
+from assets import rect, btnplay
 from os import path
 
 from config import IMG_DIR, BLACK, FPS, GAME, QUIT
@@ -12,10 +13,11 @@ def init_screen(screen):
     # Carrega o fundo da tela inicial
     background = pygame.image.load(path.join(IMG_DIR, 'menu.png')).convert()
     background_rect = background.get_rect()
+    play_position = rect(350, 200, 100, 100)
+
 
     running = True
     while running:
-
         # Ajusta a velocidade do jogo.
         clock.tick(FPS)
 
@@ -26,9 +28,10 @@ def init_screen(screen):
                 state = QUIT
                 running = False
 
-            if event.type == pygame.MOUSEBUTTONUP:
-                state = GAME
-                running = False
+            if event.type == MOUSEBUTTONDOWN:
+                mouse = pygame.mouse.get_pos()
+                if play_position.collidepoint(mouse):
+                    state = GAME
 
         # A cada loop, redesenha o fundo e os sprites
         screen.fill(BLACK)
