@@ -31,7 +31,7 @@ class baloo(pygame.sprite.Sprite):
         if self.rect.left < 0:
             self.rect.left = 0
 
-    def shoot(self):
+    '''def shoot(self):
         # Verifica se pode atirar
         now = pygame.time.get_ticks()
         # Verifica quantos ticks se passaram desde o último tiro.
@@ -45,7 +45,7 @@ class baloo(pygame.sprite.Sprite):
             new_bullet = Bullet(self.assets, self.rect.top, self.rect.centerx)
             self.groups['all_sprites'].add(new_bullet)
             self.groups['all_bullets'].add(new_bullet)
-            #self.assets[BLA_SOUNDS].play()
+            #self.assets[BLA_SOUNDS].play()'''
 
 class objetos(pygame.sprite.Sprite):
     def __init__(self, assets):

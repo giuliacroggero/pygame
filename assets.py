@@ -1,6 +1,6 @@
 import pygame
 import os
-from config import MENU_WIDTH, MENU_HEIGHT, BALOO_WIDTH, BALOO_HEIGHT, IMG_DIR, SND_DIR, FNT_DIR, CANETA_WIDTH, CANETA_HEIGHT, CONTROLE_HEIGHT, CONTROLE_WIDTH, LATINHA_HEIGHT, LATINHA_WIDTH, PLAY_WIDTH, PLAY_HEIGHT
+from config import MENU_WIDTH, MENU_HEIGHT, BALOO_WIDTH, BALOO_HEIGHT, IMG_DIR, SND_DIR, FNT_DIR, CANETA_WIDTH, CANETA_HEIGHT, CONTROLE_HEIGHT, CONTROLE_WIDTH, LATINHA_HEIGHT, LATINHA_WIDTH, PLAY_WIDTH, PLAY_HEIGHT, BLUE
 
 SCORE_FONT = 'score_font'
 MENU_IMG = 'menu_img'
@@ -14,11 +14,13 @@ MACA_IMG = 'maca_img'
 BISCOITO_IMG = 'biscoito_img'
 CENOURA_IMG = 'cenoura_img'
 PLAY_IMG = 'play_img'
-btnplay = pygame.image.load('play.png').convert_alpha()
-rect = btnplay.get_rect()
+LATIDO_SOUND = 'latido_sound'
+CHORO_SOUND = 'choro_sound'
+BACKGROUND = 'background'
 
 def load_assets():
     assets = {}
+    assets[BACKGROUND] = pygame.image.load(os.path.join(IMG_DIR, 'fundojogo.png')).convert()
     assets[MENU_IMG] = pygame.image.load(os.path.join(IMG_DIR, 'menu.png')).convert_alpha()
     assets[MENU_IMG] = pygame.transform.scale(assets['menu_img'], (MENU_WIDTH, MENU_HEIGHT))
     assets[BALOO_IMG] = pygame.image.load(os.path.join(IMG_DIR, 'baloo.png')).convert_alpha()
@@ -32,14 +34,13 @@ def load_assets():
     assets[SCORE_FONT] = pygame.font.Font(os.path.join(FNT_DIR, 'PressStart2P.ttf'), 28)
     assets[PLAY_IMG] = pygame.image.load(os.path.join(IMG_DIR, 'play.png')).convert_alpha()
     assets[PLAY_IMG] = pygame.transform.scale(assets['play_img'], (PLAY_WIDTH, PLAY_HEIGHT))
-    btnplay = pygame.image.load('play.png').convert_alpha()
-    rect = btnplay.get_rect()
+    
 
 
-    pygame.mixer.music.load(os.path.join(SND_DIR, 'musicafundo.wav'))
+    pygame.mixer.music.load(os.path.join(SND_DIR, 'musicafundo.ogg'))
     pygame.mixer.music.set_volume(0.4)
-    assets['COLOCA O LATIDO'] = pygame.mixer.Sound(os.path.join(SND_DIR, 'expl3.wav'))
-    assets['SALIVA DE GOSTOU'] = pygame.mixer.Sound(os.path.join(SND_DIR, 'expl6.wav'))
+    assets[LATIDO_SOUND] = pygame.mixer.Sound(os.path.join(SND_DIR, 'latido.wav'))
+    assets[CHORO_SOUND] = pygame.mixer.Sound(os.path.join(SND_DIR, 'choro.wav'))
     
 
 

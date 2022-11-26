@@ -1,6 +1,6 @@
 import pygame
-from config import FPS, WIDTH, HEIGHT, BLACK
-from assets import load_assets, SCORE_FONT
+from config import FPS, WIDTH, HEIGHT, BLACK, BLUE
+from assets import load_assets, SCORE_FONT, CHORO_SOUND, LATIDO_SOUND, BACKGROUND
 from sprites import baloo, comidas, objetos
 
 
@@ -74,7 +74,6 @@ def game_screen(window):
                             player.speedx -= 8
 
         # ----- Atualiza estado do jogo
-        # Atualizando a posição dos meteoros
         all_sprites.update()
 
         if state == PLAYING:
@@ -82,14 +81,24 @@ def game_screen(window):
             hits = pygame.sprite.spritecollide(player, all_objetos, True, pygame.sprite.collide_mask)
             if len(hits) > 0:
                 #toca o latido e são criados novos objetos
-                assets['procurar som de reclamacao'].play()
+                assets[CHORO_SOUND].play()
                 o = objetos(assets)
                 all_sprites.add(o)
                 all_objetos.add(o)
                 lives =  lives - 1
 
                 score = score
-                #Fazer sumir o objeto que encostou no baloo
+
+            hits = pygame.sprite.spritecollide(player, all_comidas, True, pygame.sprite.collide_mask)
+            if len(hits) > 0:
+                #toca o latido e são criados novos objetos
+                assets[LATIDO_SOUND].play()
+                o = objetos(assets)
+                all_sprites.add(o)
+                all_objetos.add(o)
+                lives =  lives
+
+                score = score + 1
 
         if lives == 0:
                 state = DONE
@@ -100,7 +109,7 @@ def game_screen(window):
 
         # ----- Gera saídas
         window.fill(BLACK)  # Preenche com a cor branca
-        #window.blit(assets[BACKGROUND], (0, 0))
+        window.blit(assets[BACKGROUND], (0, 0))
         # Desenhando meteoros
         all_sprites.draw(window)
     
@@ -111,7 +120,7 @@ def game_screen(window):
         window.blit(text_surface, text_rect)
 
         # Desenhando as vidas
-        text_surface = assets[SCORE_FONT].render(chr(9829) * lives, True, RED)
+        text_surface = assets[SCORE_FONT].render(chr(9829) * lives, True, BLUE)
         text_rect = text_surface.get_rect()
         text_rect.bottomleft = (10, HEIGHT - 10)
         window.blit(text_surface, text_rect)
