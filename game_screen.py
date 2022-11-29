@@ -15,24 +15,23 @@ def game_screen(window):
     all_sprites = pygame.sprite.Group()
     all_objetos = pygame.sprite.Group()
     all_comidas = pygame.sprite.Group()
-    #all_bullets = pygame.sprite.Group()
     groups = {}
     groups['all_sprites'] = all_sprites
     groups['all_objetos'] = all_objetos
     groups['all_comidas'] = all_comidas
 
     # Criando o jogador
-    player = baloo(groups, assets)
+    player = baloo(groups,assets)
     all_sprites.add(player)
     # Criando os objetos
     for i in range(3):
         Objetos = objetos(assets)
-        all_sprites.add(objetos)
-        all_comidas.add(objetos)
+        all_sprites.add(Objetos)
+        all_objetos.add(Objetos)
     for i in range(4):
         Comidas = comidas(assets)
-        all_sprites.add(comidas)
-        all_comidas.add(comidas)
+        all_sprites.add(Comidas)
+        all_comidas.add(Comidas)
 
     DONE = 0
     PLAYING = 1
@@ -110,11 +109,10 @@ def game_screen(window):
         # ----- Gera saídas
         window.fill(BLACK)  # Preenche com a cor branca
         window.blit(assets[BACKGROUND], (0, 0))
-        # Desenhando meteoros
         all_sprites.draw(window)
     
         # Desenhando o score
-        #text_surface = assets[SCORE_FONT].render("{:08d}".format(score), True, YELLOW)
+        text_surface = assets[SCORE_FONT].render("{:08d}".format(score), True, BLUE)
         text_rect = text_surface.get_rect()
         text_rect.midtop = (WIDTH / 2,  10)
         window.blit(text_surface, text_rect)

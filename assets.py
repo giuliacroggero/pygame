@@ -1,6 +1,6 @@
 import pygame
 import os
-from config import MENU_WIDTH, MENU_HEIGHT, BALOO_WIDTH, BALOO_HEIGHT, IMG_DIR, SND_DIR, FNT_DIR, CANETA_WIDTH, CANETA_HEIGHT, CONTROLE_HEIGHT, CONTROLE_WIDTH, LATINHA_HEIGHT, LATINHA_WIDTH, PLAY_WIDTH, PLAY_HEIGHT, BLUE
+from config import MENU_WIDTH, MENU_HEIGHT, BALOO_WIDTH, BALOO_HEIGHT, IMG_DIR, SND_DIR, FNT_DIR, CANETA_WIDTH, CANETA_HEIGHT, CONTROLE_HEIGHT, CONTROLE_WIDTH, LATINHA_HEIGHT, LATINHA_WIDTH, MACA_WIDTH, MACA_HEIGHT, PLAY_WIDTH, PLAY_HEIGHT, BLUE, BISCOITO_HEIGHT, BISCOITO_WIDTH, CENOURA_HEIGHT, CENOURA_WIDTH, RACAO_HEIGHT, RACAO_WIDTH
 
 SCORE_FONT = 'score_font'
 MENU_IMG = 'menu_img'
@@ -33,7 +33,15 @@ def load_assets():
     assets[LATINHA_IMG] = pygame.transform.scale(assets['latinha_img'], (LATINHA_WIDTH, LATINHA_HEIGHT))
     assets[SCORE_FONT] = pygame.font.Font(os.path.join(FNT_DIR, 'PressStart2P.ttf'), 28)
     assets[PLAY_IMG] = pygame.image.load(os.path.join(IMG_DIR, 'play.png')).convert_alpha()
-    assets[PLAY_IMG] = pygame.transform.scale(assets['play_img'], (PLAY_WIDTH, PLAY_HEIGHT))
+    assets[PLAY_IMG] = pygame.transform.scale(assets['play_img'], (MACA_WIDTH, MACA_HEIGHT))
+    assets[MACA_IMG] = pygame.image.load(os.path.join(IMG_DIR, 'maca.png')).convert_alpha()
+    assets[MACA_IMG] = pygame.transform.scale(assets['maca_img'], (MACA_WIDTH, MACA_HEIGHT))
+    assets[CENOURA_IMG] = pygame.image.load(os.path.join(IMG_DIR, 'cenoura.png')).convert_alpha()
+    assets[CENOURA_IMG] = pygame.transform.scale(assets['cenoura_img'], (MACA_WIDTH, MACA_HEIGHT))
+    assets[BISCOITO_IMG] = pygame.image.load(os.path.join(IMG_DIR, 'biscoito.png')).convert_alpha()
+    assets[BISCOITO_IMG] = pygame.transform.scale(assets['biscoito_img'], (BISCOITO_WIDTH, BISCOITO_HEIGHT))
+    assets[RACAO_IMG] = pygame.image.load(os.path.join(IMG_DIR, 'biscoito.png')).convert_alpha()
+    assets[RACAO_IMG] = pygame.transform.scale(assets['biscoito_img'], (RACAO_WIDTH, RACAO_HEIGHT))
     
 
 
